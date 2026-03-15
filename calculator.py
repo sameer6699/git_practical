@@ -11,6 +11,9 @@ class Calculator:
     def __init__(self):
         """Initialize the calculator with a result tracker."""
         self._result = 0  # Encapsulation: protected attribute
+        self._history = []
+        self._history_index = 0
+        self._history_limit = 10
 
     def add(self, a: float, b: float) -> float:
         """Return the sum of a and b."""
