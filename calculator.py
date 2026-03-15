@@ -2,6 +2,7 @@
 Simple Calculator - Python OOP Demo
 A basic calculator using Object-Oriented Programming concepts.
 """
+import math
 
 
 class Calculator:
@@ -33,6 +34,30 @@ class Calculator:
         self._result = a / b
         return self._result
 
+    def power(self, base: float, exponent: float) -> float:
+        """Return base raised to the power of exponent."""
+        self._result = base ** exponent
+        return self._result
+
+    def modulo(self, a: float, b: float) -> float:
+        """Return the remainder of a divided by b. Raises ValueError if b is zero."""
+        if b == 0:
+            raise ValueError("Cannot modulo by zero")
+        self._result = a % b
+        return self._result
+
+    def square_root(self, x: float) -> float:
+        """Return the square root of x. Raises ValueError if x is negative."""
+        if x < 0:
+            raise ValueError("Cannot take square root of a negative number")
+        self._result = math.sqrt(x)
+        return self._result
+
+    def absolute(self, x: float) -> float:
+        """Return the absolute value of x."""
+        self._result = abs(x)
+        return self._result
+
     @property
     def result(self) -> float:
         """Return the last computed result (encapsulation)."""
@@ -52,37 +77,53 @@ def main():
     print("2. Subtract")
     print("3. Multiply")
     print("4. Divide")
-    print("5. Exit\n")
+    print("5. Power (x^y)")
+    print("6. Modulo (remainder)")
+    print("7. Square root")
+    print("8. Absolute value")
+    print("9. Exit\n")
 
     while True:
-        choice = input("Enter choice (1-5): ").strip()
+        choice = input("Enter choice (1-9): ").strip()
 
-        if choice == "5":
+        if choice == "9":
             print("Goodbye!")
             break
 
-        if choice not in ("1", "2", "3", "4"):
+        if choice not in ("1", "2", "3", "4", "5", "6", "7", "8"):
             print("Invalid choice. Try again.\n")
             continue
 
         try:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
+            if choice in ("7", "8"):
+                num1 = float(input("Enter number: "))
+                num2 = 0  # not used
+            else:
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
         except ValueError:
             print("Please enter valid numbers.\n")
             continue
 
-        if choice == "1":
-            print(f"Result: {calc.add(num1, num2)}\n")
-        elif choice == "2":
-            print(f"Result: {calc.subtract(num1, num2)}\n")
-        elif choice == "3":
-            print(f"Result: {calc.multiply(num1, num2)}\n")
-        elif choice == "4":
-            try:
+        try:
+            if choice == "1":
+                print(f"Result: {calc.add(num1, num2)}\n")
+            elif choice == "2":
+                print(f"Result: {calc.subtract(num1, num2)}\n")
+            elif choice == "3":
+                print(f"Result: {calc.multiply(num1, num2)}\n")
+            elif choice == "4":
                 print(f"Result: {calc.divide(num1, num2)}\n")
-            except ValueError as e:
-                print(f"Error: {e}\n")
+            elif choice == "5":
+                print(f"Result: {calc.power(num1, num2)}\n")
+            elif choice == "6":
+                print(f"Result: {calc.modulo(num1, num2)}\n")
+            elif choice == "7":
+                print(f"Result: {calc.square_root(num1)}\n")
+            elif choice == "8":
+                print(f"Result: {calc.absolute(num1)}\n")
+        except ValueError as e:
+            print(f"Error: {e}\n")
 
 
 if __name__ == "__main__":
