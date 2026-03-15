@@ -14,6 +14,7 @@ class Calculator:
         self._history = []
         self._history_index = 0
         self._history_limit = 10
+        self._history_position = 0
 
     def add(self, a: float, b: float) -> float:
         """Return the sum of a and b."""
